@@ -5,12 +5,12 @@ let demo = document.getElementById('demo')
 let count=0;
 btn1.addEventListener('click',decrease)
 function decrease(){
-count++;
+    count--;
 demo.textContent=count;
 }
 btn3.addEventListener('click',increase)
 function increase(){
-count--;
+    count++;
 demo.textContent=count;
 }
 btn2.addEventListener('click',reset)
