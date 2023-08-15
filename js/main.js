@@ -1,20 +1,41 @@
-let btn1 = document.getElementById('btn1')
-let btn2 = document.getElementById('btn2')
-let btn3 = document.getElementById('btn3')
-let demo = document.getElementById('demo')
-let count=0;
-btn1.addEventListener('click',decrease)
-function decrease(){
-    count--;
-demo.textContent=count;
-}
-btn3.addEventListener('click',increase)
-function increase(){
-    count++;
-demo.textContent=count;
-}
-btn2.addEventListener('click',reset)
-function reset(){
-count=0
-demo.textContent=count;
+let start = document.getElementById("start");
+let stop = document.getElementById("Stop");
+let rest = document.getElementById("Rest");
+
+let displayTime = document.getElementById("displayTime");
+let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0]; //new
+let int;
+start.addEventListener("click", () => {
+  int = setInterval(displayTimer, 1);
+});
+
+stop.addEventListener("click", () => {
+  clearInterval(int);
+});
+
+rest.addEventListener("click", () => {
+  clearInterval(int);
+  let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+  displayTime.innerHTML = "00 : 00 : 00 : 00";
+});
+
+function displayTimer() {
+  milliseconds++;
+  if (milliseconds == 60) {
+    milliseconds = 0;
+    seconds++;
+    if (seconds == 60) {
+      seconds = 0;
+      minutes++;
+      if (minutes == 60) {
+        minutes = 0;
+        hours++;
+      }
+    }
+  }
+  let h = hours < 10 ? "0" + hours : hours;
+  let m = minutes < 10 ? "0" + minutes : minutes;
+  let s = seconds < 10 ? "0" + seconds : seconds;
+  let ms = milliseconds < 10 ? "0" + milliseconds : milliseconds;
+  displayTime.innerHTML = `${h} : ${m} : ${s} : ${ms}`;
 }
